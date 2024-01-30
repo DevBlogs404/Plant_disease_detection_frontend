@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../App.css";
 import axios from "axios";
 import { result } from "../../types/types";
 import { Button } from "@/components/ui/button";
 import Dropzone from "@/components/Dropzone";
 import DiseaseResults from "../DiseaseResults";
-import Loading from "@/components/Loading";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 const DiseaseDetection = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -58,7 +58,7 @@ const DiseaseDetection = () => {
       formData.append("image", selectedFile as Blob);
 
       const diseaseDetectionresponse = await axios.post(
-        "http://localhost:6969/image-upload",
+        "http://localhost:6969/api/v1/image-upload",
         formData
       );
 
@@ -68,7 +68,7 @@ const DiseaseDetection = () => {
 
       // handling detected disease detail
       const diseaseInfoResponse = await axios.post(
-        "http://localhost:6969/disease-info",
+        "http://localhost:6969/api/v1/disease-info",
         {
           text: diseaseDetectionresponse.data[0].label
             .split("_")
@@ -86,7 +86,7 @@ const DiseaseDetection = () => {
 
       // handling detected disease detail translation to hindi
       const translateToHindi = await axios.post(
-        "http://localhost:6969/translate",
+        "http://localhost:6969/api/v1/translate",
         { text: modifiedText }
       );
 
@@ -94,7 +94,7 @@ const DiseaseDetection = () => {
 
       // handling detected disease solution/prevention
       const diseaseSolutionResponse = await axios.post(
-        "http://localhost:6969/disease-prevention",
+        "http://localhost:6969/api/v1/disease-prevention",
         {
           text: diseaseDetectionresponse.data[0].label
             .split("_")
@@ -124,10 +124,17 @@ const DiseaseDetection = () => {
         <button onClick={handleUpload}>Upload Image</button>
       </div> */}
 
-      <Dropzone handleFileChange={handleFileChange} />
+      {<Dropzone handleFileChange={handleFileChange} />}
       {error && <p className="text-red-600 font-bold">{error}</p>}
       <Button variant={"outline"} size={"lg"} onClick={handleUpload}>
-        {loading ? <Loading /> : "Analyze"}
+        {loading ? (
+          <p className="flex items-center justify-center gap-1">
+            Analyzing
+            <Loader2 className="animate-spin duration-500" />
+          </p>
+        ) : (
+          "Analyze"
+        )}
       </Button>
 
       <DiseaseResults
