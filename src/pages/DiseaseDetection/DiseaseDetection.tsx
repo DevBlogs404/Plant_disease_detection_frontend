@@ -11,15 +11,28 @@ import { Loader2 } from "lucide-react";
 const DiseaseDetection = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [image, setImage] = useState<string>("");
+
   const [disease, setDisease] = useState<result>({
     label: "",
     score: 0,
   });
   const [text, setText] = useState<string>("");
-  const [textToTranslate, setTextToTranslate] = useState<string>("");
+  const [textToHindi, setTextToHindi] = useState<string>("");
+
   const [prevention, setPrevention] = useState<string>("");
+  const [preventionToHindi, setPreventionToHindi] = useState<string>("");
+
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const translate = async (input: string) => {
+    const response = await axios.post(
+      "http://localhost:6969/api/v1/translate",
+      { text: input }
+    );
+
+    return response;
+  };
 
   // useEffect(() => {
   //   if (!selectedFile) {
@@ -85,12 +98,9 @@ const DiseaseDetection = () => {
       setText(modifiedText);
 
       // handling detected disease detail translation to hindi
-      const translateToHindi = await axios.post(
-        "http://localhost:6969/api/v1/translate",
-        { text: modifiedText }
-      );
+      const translateToHindi = await translate(modifiedText);
 
-      setTextToTranslate(translateToHindi.data.translation_text);
+      setTextToHindi(translateToHindi.data.translation_text);
 
       // handling detected disease solution/prevention
       const diseaseSolutionResponse = await axios.post(
@@ -103,11 +113,18 @@ const DiseaseDetection = () => {
         }
       );
 
-      setPrevention(
+      const modifiedPreventionText =
         diseaseSolutionResponse.data.generated_text.substring(
           diseaseSolutionResponse.data.generated_text.indexOf(":") + 1
-        )
+        );
+
+      setPrevention(modifiedPreventionText);
+
+      const translatePreventionToHindi = await translate(
+        modifiedPreventionText
       );
+
+      setPreventionToHindi(translatePreventionToHindi.data.translation_text);
     } catch (error) {
       console.error("Error uploading image:", error);
       setError("Error uploading image");
@@ -140,9 +157,10 @@ const DiseaseDetection = () => {
       <DiseaseResults
         loading={loading}
         text={text}
-        textToTranslate={textToTranslate}
+        textToHindi={textToHindi}
         disease={disease}
         prevention={prevention}
+        preventionToHindi={preventionToHindi}
         image={image}
       />
     </div>

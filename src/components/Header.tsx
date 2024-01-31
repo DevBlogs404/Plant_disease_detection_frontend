@@ -16,7 +16,7 @@ const Header = () => {
       <div className="flex items-center justify-center gap-2">
         <img src={logo} alt="logo" className="w-8 m-0" />
         <p className="text-black text-md font-bold md:text-xl lg:text-2xl">
-          CropGuard Insight
+          <Link to={"/"}>CropGuard Insight</Link>
         </p>
       </div>
       {/* <div>

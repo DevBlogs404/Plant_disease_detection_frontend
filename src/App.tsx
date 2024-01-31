@@ -7,7 +7,7 @@ import DiseaseDetection from "./pages/DiseaseDetection";
 function App() {
   return (
     <BrowserRouter>
-      <main className=" bg-gradient-to-r  from-rose-100 to-teal-100 max-w-6xl mx-auto min-h-[100vh]">
+      <main className=" bg-gradient-to-r  from-rose-100 to-teal-100 max-w-7xl mx-auto min-h-screen">
         <Header />
         <Routes>
           <Route path="/" element={<Landing />} />
