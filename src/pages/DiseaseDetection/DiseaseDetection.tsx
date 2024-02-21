@@ -77,7 +77,7 @@ const DiseaseDetection = () => {
         formData,
         {
           headers: {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": true,
           },
         }
       );
@@ -95,6 +95,11 @@ const DiseaseDetection = () => {
             .split("_")
             .slice(1)
             .join(" "),
+        },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": true,
+          },
         }
       );
 
