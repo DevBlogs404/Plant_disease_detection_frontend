@@ -29,7 +29,12 @@ const DiseaseDetection = () => {
     const response = await axios.post(
       // "http://localhost:6969/api/v1/translate",
       "https://plant-disease-detection-backend.vercel.app/api/v1/translate",
-      { text: input }
+      { text: input },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
     );
 
     return response;
@@ -77,7 +82,7 @@ const DiseaseDetection = () => {
         formData,
         {
           headers: {
-            "Access-Control-Allow-Origin": true,
+            "Access-Control-Allow-Origin": "*",
           },
         }
       );
@@ -98,7 +103,7 @@ const DiseaseDetection = () => {
         },
         {
           headers: {
-            "Access-Control-Allow-Origin": true,
+            "Access-Control-Allow-Origin": "*",
           },
         }
       );
@@ -124,6 +129,11 @@ const DiseaseDetection = () => {
             .split("_")
             .slice(1)
             .join(" "),
+        },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
         }
       );
 
