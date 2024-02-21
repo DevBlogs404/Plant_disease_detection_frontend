@@ -27,7 +27,8 @@ const DiseaseDetection = () => {
 
   const translate = async (input: string) => {
     const response = await axios.post(
-      "http://localhost:6969/api/v1/translate",
+      // "http://localhost:6969/api/v1/translate",
+      "https://plant-disease-detection-backend.vercel.app/api/v1/translate",
       { text: input }
     );
 
@@ -71,7 +72,8 @@ const DiseaseDetection = () => {
       formData.append("image", selectedFile as Blob);
 
       const diseaseDetectionresponse = await axios.post(
-        "http://localhost:6969/api/v1/image-upload",
+        // "http://localhost:6969/api/v1/image-upload",
+        "https://plant-disease-detection-backend.vercel.app/api/v1/image-upload",
         formData
       );
 
@@ -81,7 +83,8 @@ const DiseaseDetection = () => {
 
       // handling detected disease detail
       const diseaseInfoResponse = await axios.post(
-        "http://localhost:6969/api/v1/disease-info",
+        // "http://localhost:6969/api/v1/disease-info",
+        "https://plant-disease-detection-backend.vercel.app/api/v1/disease-info",
         {
           text: diseaseDetectionresponse.data[0].label
             .split("_")
@@ -104,7 +107,8 @@ const DiseaseDetection = () => {
 
       // handling detected disease solution/prevention
       const diseaseSolutionResponse = await axios.post(
-        "http://localhost:6969/api/v1/disease-prevention",
+        // "http://localhost:6969/api/v1/disease-prevention",
+        "https://plant-disease-detection-backend.vercel.app/api/v1/disease-prevention",
         {
           text: diseaseDetectionresponse.data[0].label
             .split("_")
