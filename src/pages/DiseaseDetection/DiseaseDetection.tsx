@@ -27,7 +27,7 @@ const DiseaseDetection = () => {
 
   const translate = async (input: string) => {
     const response = await axios.post(
-      // "http://localhost:6969/api/v1/translate",
+      // "http://localhost:6868/api/v1/translate",
       "https://plant-disease-detection-backend.vercel.app/api/v1/translate",
       { text: input },
       {
@@ -77,7 +77,7 @@ const DiseaseDetection = () => {
       formData.append("image", selectedFile as Blob);
 
       const diseaseDetectionresponse = await axios.post(
-        // "http://localhost:6969/api/v1/image-upload",
+        // "http://localhost:6868/api/v1/image-upload",
         "https://plant-disease-detection-backend.vercel.app/api/v1/image-upload",
         formData,
         {
@@ -93,7 +93,7 @@ const DiseaseDetection = () => {
 
       // handling detected disease detail
       const diseaseInfoResponse = await axios.post(
-        // "http://localhost:6969/api/v1/disease-info",
+        // "http://localhost:6868/api/v1/disease-info",
         "https://plant-disease-detection-backend.vercel.app/api/v1/disease-info",
         {
           text: diseaseDetectionresponse.data[0].label
@@ -122,7 +122,7 @@ const DiseaseDetection = () => {
 
       // handling detected disease solution/prevention
       const diseaseSolutionResponse = await axios.post(
-        // "http://localhost:6969/api/v1/disease-prevention",
+        // "http://localhost:6868/api/v1/disease-prevention",
         "https://plant-disease-detection-backend.vercel.app/api/v1/disease-prevention",
         {
           text: diseaseDetectionresponse.data[0].label
@@ -167,16 +167,18 @@ const DiseaseDetection = () => {
 
       {<Dropzone handleFileChange={handleFileChange} />}
       {error && <p className="text-red-600 font-bold">{error}</p>}
-      <Button variant={"outline"} size={"lg"} onClick={handleUpload}>
-        {loading ? (
-          <p className="flex items-center justify-center gap-1">
-            Analyzing
-            <Loader2 className="animate-spin duration-500" />
-          </p>
-        ) : (
-          "Analyze"
-        )}
-      </Button>
+      {
+        <Button variant={"outline"} size={"lg"} onClick={handleUpload}>
+          {loading ? (
+            <p className="flex items-center justify-center gap-1">
+              Analyzing
+              <Loader2 className="animate-spin duration-500" />
+            </p>
+          ) : (
+            "Analyze"
+          )}
+        </Button>
+      }
 
       <DiseaseResults
         loading={loading}
