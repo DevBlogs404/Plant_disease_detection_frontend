@@ -76,12 +76,10 @@ const DiseaseDetection = () => {
       const formData = new FormData();
       formData.append("image", selectedFile as Blob);
 
-      console.log(formData);
-
       const diseaseDetectionresponse = await axios.post(
         // "http://localhost:6868/api/v1/image-upload",
         "https://plant-disease-detection-backend.vercel.app/api/v1/image-upload",
-        formData
+        { formData }
         // {
         //   headers: {
         //     "Access-Control-Allow-Origin": "*",
@@ -89,7 +87,7 @@ const DiseaseDetection = () => {
         // }
       );
 
-      setSelectedFile(null);
+      // setSelectedFile(null);
 
       setDisease(diseaseDetectionresponse.data[0]);
 
