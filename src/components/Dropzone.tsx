@@ -30,7 +30,7 @@ const Dropzone = ({ handleFileChange }: IDropzone) => {
             drop
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            PNG, JPG or JPEG
+            only PNG, JPG or JPEG images allowed.
           </p>
         </div>
         <input
