@@ -48,6 +48,24 @@ const DiseaseDetection = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
+      const fileType = file.type;
+
+      if (
+        fileType !== "image/png" &&
+        fileType !== "image/jpeg" &&
+        fileType !== "image/jpg"
+      ) {
+        toast.error(
+          "Unsupported file type! Please upload a PNG or JPEG/JPG image.",
+          {
+            classNames: {
+              toast: "bg-red-400",
+              title: "text-red-400 text-xl",
+            },
+          }
+        );
+        return;
+      }
 
       // Create a URL for the selected image
       const imageUrl = URL.createObjectURL(file);
