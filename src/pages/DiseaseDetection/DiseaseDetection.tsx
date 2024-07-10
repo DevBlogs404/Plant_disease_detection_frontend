@@ -29,12 +29,12 @@ const DiseaseDetection = () => {
     const response = await axios.post(
       // "http://localhost:6868/api/v1/translate",
       "https://plant-disease-detection-backend.vercel.app/api/v1/translate",
-      { text: input },
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
+      { text: input }
+      // {
+      //   headers: {
+      //     "Access-Control-Allow-Origin": "*",
+      //   },
+      // }
     );
 
     return response;
@@ -76,15 +76,17 @@ const DiseaseDetection = () => {
       const formData = new FormData();
       formData.append("image", selectedFile as Blob);
 
+      console.log(formData);
+
       const diseaseDetectionresponse = await axios.post(
         // "http://localhost:6868/api/v1/image-upload",
         "https://plant-disease-detection-backend.vercel.app/api/v1/image-upload",
-        formData,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
+        formData
+        // {
+        //   headers: {
+        //     "Access-Control-Allow-Origin": "*",
+        //   },
+        // }
       );
 
       setSelectedFile(null);
@@ -100,12 +102,12 @@ const DiseaseDetection = () => {
             .split("_")
             .slice(1)
             .join(" "),
-        },
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
         }
+        // {
+        //   headers: {
+        //     "Access-Control-Allow-Origin": "*",
+        //   },
+        // }
       );
 
       // modifying response for user presentation
@@ -129,12 +131,12 @@ const DiseaseDetection = () => {
             .split("_")
             .slice(1)
             .join(" "),
-        },
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
         }
+        // {
+        //   headers: {
+        //     "Access-Control-Allow-Origin": "*",
+        //   },
+        // }
       );
 
       const modifiedPreventionText =
