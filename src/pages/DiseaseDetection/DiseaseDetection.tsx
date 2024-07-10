@@ -56,13 +56,9 @@ const DiseaseDetection = () => {
         fileType !== "image/jpg"
       ) {
         toast.error(
-          "Unsupported file type! Please upload a PNG or JPEG/JPG image.",
-          {
-            classNames: {
-              toast: "bg-red-400",
-              title: "text-red-400 text-xl",
-            },
-          }
+          <div className="w-auto">
+            Unsupported file type! Please upload a PNG or JPEG/JPG image.
+          </div>
         );
         return;
       }
@@ -78,7 +74,7 @@ const DiseaseDetection = () => {
   const handleUpload = async () => {
     try {
       if (!selectedFile) {
-        toast.error("Please select an image!", {
+        toast.error("Please select another image!", {
           classNames: {
             toast: "bg-red-400",
             title: "text-red-400 text-xl",

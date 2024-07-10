@@ -9,6 +9,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <App />
     <Toaster
       position="top-center"
+      richColors
       // theme="dark"
     />
   </React.StrictMode>
