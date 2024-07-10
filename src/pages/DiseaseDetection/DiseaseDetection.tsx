@@ -79,7 +79,7 @@ const DiseaseDetection = () => {
       const diseaseDetectionresponse = await axios.post(
         // "http://localhost:6868/api/v1/image-upload",
         "https://plant-disease-detection-backend.vercel.app/api/v1/image-upload",
-        { formData }
+        formData
         // {
         //   headers: {
         //     "Access-Control-Allow-Origin": "*",
